@@ -29,6 +29,21 @@ public:
         plane_ticket = ticket;
         rel_price = r_price;
     }
+    string get_name(){
+        return name;
+    }
+    float get_temp(){
+        return temp;
+    }
+    int get_plane_ticket(){
+        return plane_ticket;
+    }
+    float get_rel_price(){
+        return rel_price;
+    }
+    string get_country(){
+        return country;
+    }
     void print(){
         cout << "Name of the city : " << name << endl;
         cout << "Temperature : " << temp << endl;

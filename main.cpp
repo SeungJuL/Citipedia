@@ -8,11 +8,13 @@
 #include <algorithm>
 #include "RBTree.h"
 #include "City.h"
+#include "map.h"
 using namespace std;
 
 int main(){
     random_device rd;
     RBTree tree;
+    map m;
 
 
     // Get user input for tree or map
@@ -68,7 +70,8 @@ int main(){
 
         //city.print();
 
-        tree.insert(city);
+        //tree.insert(city);
+        m.insert(city);
         // 여기서 tree 나 map 으로 이 city object 넣으면서 build
 
 //        if (option == 1){ // tree
@@ -84,6 +87,7 @@ int main(){
 
     }
     tree.printInorder();
+    m.traverse();
 
 
     return 0;

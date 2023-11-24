@@ -13,7 +13,7 @@ map::map(){
 }
 void map::insert(City c) {
     hash<string> h;
-    int code=h(c.getName()) % capacity;
+    int code=h(c.get_name()) % capacity;
 
     vec.at(code).push_back(c);
 
@@ -34,7 +34,7 @@ void map::rehash() {
 
     for(auto i:temp){
         for(int j=0; j<i.size(); j++){
-            code=h(i.at(j).getName()) % capacity;
+            code=h(i.at(j).get_name()) % capacity;
 
             vec.at(code).push_back(i.at(j));
         }

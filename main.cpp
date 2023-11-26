@@ -23,16 +23,16 @@ int main(){
 //    cin >> option;
 
     // predefined value for Gainesville temp
-//    float temp[12] = {55.5, 58, 64, 69, 75.5, 80, 82, 82, 79, 72, 64.5, 59};
-//    cout << "What month is it now? ";
-//    int month;
-//    cin >> month;
+    float temp[12] = {55.5, 58, 64, 69, 75.5, 80, 82, 82, 79, 72, 64.5, 59};
+    cout << "What month is it now? "<<endl;
+    int month;
+    cin >> month;
 //
-//    float curr_temp = temp[month-1];
+    float curr_temp = temp[month-1];
 
 
     // read file
-    ifstream file("worldcities.csv");
+    ifstream file("new_worldcities.csv");
     string line;
 
     // skip first line (header)
@@ -70,8 +70,8 @@ int main(){
 
         //city.print();
 
-        //tree.insert(city);
-        m.insert(city);
+        tree.insert(city);
+        //m.insert(city);
         // 여기서 tree 나 map 으로 이 city object 넣으면서 build
 
 //        if (option == 1){ // tree
@@ -81,7 +81,7 @@ int main(){
 //
 //        }
         //city.print();
-        if(count == 50){ // 지워야함 just for test
+        if(count == 500){ // 지워야함 just for test
             break;
         }
 
@@ -89,6 +89,9 @@ int main(){
     tree.printInorder();
     m.traverse();
 
+    cout<<endl;
+    cout<<"Fisnished"<<endl;
+    cout<<curr_temp<<endl;
 
     return 0;
 }

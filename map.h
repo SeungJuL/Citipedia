@@ -18,7 +18,7 @@ private:
 public:
     map();
     void rehash();
-    void insert(City city);
+    void insert(City& city);
     void traverse();
 
     double getSize(){

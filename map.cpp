@@ -11,7 +11,7 @@ map::map(){
     load_factor=0.8;
     vec.resize(capacity);
 }
-void map::insert(City c) {
+void map::insert(City& c) {
     hash<string> h;
     int code=h(c.get_name()) % capacity;
 

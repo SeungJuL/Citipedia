@@ -130,12 +130,15 @@ void RBTree::balance(Node* root) {
 // citation: serene cheon's gatoravl
 void RBTree::printInorderHelper(Node* root) {
     if (root == nullptr) // when tree is empty
-        return;
+        cout<<endl;
     // inorder traversal
-    printInorderHelper(root->left);
-    cout << root->city.get_name() << root->city.get_temp() << root->city.get_country() <<
-         root->city.get_plane_ticket() << " " << root->city.get_rel_price() << " " <<endl;
-    printInorderHelper(root->right);
+    else{
+        printInorderHelper(root->left);
+        cout << root->city.get_name() << root->city.get_temp() << root->city.get_country() <<
+             root->city.get_plane_ticket() << " " << root->city.get_rel_price() << " " <<endl;
+        printInorderHelper(root->right);
+    }
+
 }
 
 void RBTree::insert(City city) {

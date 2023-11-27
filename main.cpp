@@ -30,6 +30,52 @@ int main(){
 //
     float curr_temp = temp[month-1];
 
+    // first question: temperature
+    cout << "What temperature range do you prefer?" << endl;
+    cout << "1: colder than current location" << endl;
+    cout << "2: similar to current location" << endl;
+    cout << "3: hotter than current location" << endl;
+    int option;
+    cin >> option;
+
+    float tempMin = -100; // arbitrary small number
+    float tempMax = 200; // arbitrary big number
+    // set temperature range
+    if (option == 1)
+        tempMax = curr_temp - 10;
+    else if (option == 2) {
+        tempMin = curr_temp - 10;
+        tempMax = curr_temp + 10;
+    }
+    else if (option == 3)
+        tempMin = curr_temp + 10;
+
+    // Second question: plane ticket
+    cout << "Select the maximum price range you can spend on a plane ticket." << endl;
+    cout << "1: $1 - $500" << endl;
+    cout << "2: $500 - $1,000" << endl;
+    cout << "3: $1,000 - $1,500" << endl;
+    cout << "4: $1,500 - $2,000" << endl;
+    cin >> option;
+    int ticketMin, ticketMax = 0;
+    // set plane ticket price range
+    if (option == 1) {
+        ticketMin = 1;
+        ticketMax = 500;
+    }
+    else if (option == 2) {
+        ticketMin = 500;
+        ticketMax = 1000;
+    }
+    else if (option == 3) {
+        ticketMin = 1000;
+        ticketMax = 1500;
+    }
+    else if (option == 4) {
+        ticketMin = 1500;
+        ticketMax = 2000;
+    }
+
 
     // read file
     ifstream file("new_worldcities.csv");
@@ -70,8 +116,11 @@ int main(){
 
         //city.print();
 
-        tree.insert(city);
-        //m.insert(city);
+        // insert the cities within the temperature range only
+        if (city.get_temp() >= tempMin && city.get_temp() < tempMax) {
+            tree.insert(city);
+            m.insert(city);
+        }
         // 여기서 tree 나 map 으로 이 city object 넣으면서 build
 
 //        if (option == 1){ // tree

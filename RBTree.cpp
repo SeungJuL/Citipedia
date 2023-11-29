@@ -134,8 +134,8 @@ void RBTree::printInorderHelper(Node* root) {
     // inorder traversal
     else{
         printInorderHelper(root->left);
-        cout << root->city.get_name() << root->city.get_temp() << root->city.get_country() <<
-             root->city.get_plane_ticket() << " " << root->city.get_rel_price() << " " <<endl;
+        root->city.print();
+        cout<<endl;
         printInorderHelper(root->right);
     }
 

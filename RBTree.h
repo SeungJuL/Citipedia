@@ -7,23 +7,23 @@ using namespace std;
 class RBTree {
 private:
     struct Node {
-
         City city;
         Node* left;
         Node* right;
         Node* parent;
         int color;
 
-        Node() : left(nullptr), right(nullptr), parent(nullptr), color(0) {}
+        Node() : left(nullptr), right(nullptr), parent(nullptr), color(0) {} // constructor
 
-        Node(City city) {
+        Node(City city) { // constructor
             this->city = city;
             left = nullptr;
             right = nullptr;
             parent = nullptr;
             color = 1; // 0 - black, 1 - red
         }
-        ~Node() {
+
+        ~Node() { // destructor
             delete left;
             delete right;
             delete parent;
@@ -36,11 +36,9 @@ private:
     void leftRotate(Node* root);
     void rightRotate(Node* root);
     void balance(Node* root);
-
     void printInorderHelper(Node* root,string name);
 
 public:
     void insert(City city);
     void printInorder(string name);
-    int count = 0;
 };

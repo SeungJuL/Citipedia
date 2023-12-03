@@ -14,13 +14,14 @@ private:
     int capacity;
     double size;
     vector<vector<City>> vec;
+
 public:
     map();
     void rehash();
     void insert(City& city);
     void traverse(string country);
 
-    double getSize(){
+    double getSize(){ // return size
         return size;
     }
 };

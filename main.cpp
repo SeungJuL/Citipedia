@@ -212,7 +212,7 @@ int main(){
 
     while(option!=11){
         cout<<"Wise choice."<<endl;
-        cout<<"Here is a list of all the cities that adhere to your responses within "<<countries[option-1]<<"."<<endl;
+        cout<<"Here is a list of all the cities within "<<countries[option-1]<<" that adhere to your responses."<<endl;
         cout<<endl;
         cout<<endl;
 

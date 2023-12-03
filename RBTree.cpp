@@ -131,7 +131,7 @@ void RBTree::balance(Node* root) {
 void RBTree::printInorderHelper(Node* root,string name) {
     if (root == nullptr) // when tree is empty
         cout<<"";
-    // inorder traversal
+        // inorder traversal
     else{
         printInorderHelper(root->left, name);
         if(root->city.get_country()==name){

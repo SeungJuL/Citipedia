@@ -2,8 +2,7 @@
 // Created by vickH on 11/23/2023.
 //
 
-#ifndef HASHMAP_MAP_H
-#define HASHMAP_MAP_H
+#pragma once
 #include "City.h"
 #include <vector>
 using namespace std;
@@ -26,5 +25,3 @@ public:
     }
 };
 
-
-#endif //HASHMAP_MAP_H

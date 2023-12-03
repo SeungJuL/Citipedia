@@ -19,7 +19,7 @@ public:
     map();
     void rehash();
     void insert(City& city);
-    void traverse();
+    void traverse(string country);
 
     double getSize(){
         return size;

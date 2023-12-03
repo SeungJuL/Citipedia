@@ -15,7 +15,8 @@ int main(){
     random_device rd;
     RBTree tree;
     map m;
-
+    vector<string> countries;
+    vector<int> number_of_cities;
 
     // Get user input for tree or map
     int ds_option;
@@ -26,6 +27,7 @@ int main(){
     // predefined value for Gainesville temp
     float temp[12] = {55.5, 58, 64, 69, 75.5, 80, 82, 82, 79, 72, 64.5, 59};
     cout << "What month is it now? "<<endl;
+    cout<<"Enter one number (1 for January, 2 for February, and so on)"<<endl;
     int month;
     cin >> month;
 //
@@ -33,9 +35,9 @@ int main(){
 
     // first question: temperature
     cout << "Select a temperature range for your vacation site:" << endl;
-    cout << "1: less than 10 degrees (°F) than current temperature" << endl;
-    cout << "2: within +-10 degrees (°F) to current temperature" << endl;
-    cout << "3: more than 10 degrees (°F) higher than current temperature" << endl;
+    cout << "1: less than 10 degrees (Farenheit) than current temperature" << endl;
+    cout << "2: within(+ or -) 10 degrees (Farenheit) to current temperature" << endl;
+    cout << "3: more than 10 degrees (Farenheit) higher than current temperature" << endl;
     int option;
     cin >> option;
 
@@ -78,8 +80,8 @@ int main(){
     }
 
     //Third question: relative price value
-    cout<<"Select a range for the US dollar relative price value in relation to your vacation site:"<<endl;
-    cout<<"Note: A relative price value of 0.5 indicates that 1 US dollar is worth half of the"<<endl;
+    cout<<"Select a range for the US dollar relative price value with respect to your vacation site:"<<endl;
+    cout<<"Note: A relative price value of 0.5 indicates that 1 US dollar is worth half of 1"<<endl;
     cout<<"individual unit of currency of your desired vacation region."<<endl;
     cout<<"1: 0.5-0.8" <<endl;
     cout<<"2: 0.9-1.1" <<endl;
@@ -101,15 +103,12 @@ int main(){
         priceMax=1.5;
     }
 
-
     // read file
     ifstream file("new_worldcities2.csv");
     string line;
 
     // skip first line (header)
     getline(file, line);
-
-    int count = 0; // 지워야함 just for test
 
     // read each line
     while (getline(file, line)) {
@@ -139,8 +138,6 @@ int main(){
 
         City city(fields[0], fields[4], stof(fields[2]), ticket, r_price);
 
-        //city.print();
-
         // insert the cities within the temperature range only
         if (city.get_temp() >= tempMin && city.get_temp() <= tempMax &&
             city.get_plane_ticket() >= ticketMin && city.get_plane_ticket() <= ticketMax &&
@@ -151,24 +148,98 @@ int main(){
             else{
                 m.insert(city);
             };
-        }
-        //city.print();
 
-        //debugging purposes
-        //cut off at 500 data points
-        count++;
-        if(count == 500){
-            break;
+            auto it=find(countries.begin(),countries.end(),city.get_country());
+            if( it== countries.end()){
+                countries.push_back(city.get_country());
+                number_of_cities.push_back(1);
+            }
+            else{
+                int index=it-countries.begin();
+
+                number_of_cities[index]++;
+            }
+
         }
 
     }
-    cout<<"\n\ntraversing time"<<endl;
-    tree.printInorder();
-    m.traverse();
+
+    //country selection
+
+    //sorting (top 10)
+    //use selection algorithm 10 times
+    int order[10];
+    int maxN=-1;
+    int maxI=-1;
+    for(int i=0; i<10; i++){
+        maxN=-1;
+        maxI=-1;
+
+        for(int j=i; j<number_of_cities.size(); j++){
+            int prevMaxN=maxN;
+            maxN=max(maxN,number_of_cities[j]);
+
+            if(prevMaxN!=maxN){
+                maxI=j;
+            }
+        }
+
+        //sort country name
+        string tempS=countries[i];
+        string maxS=countries[maxI];
+        countries[i]=maxS;
+        countries[maxI]=tempS;
+
+        //sort number of cities values
+        int temp=number_of_cities[i];
+        number_of_cities[i]=maxN;
+        number_of_cities[maxI]=temp;
+    }
+
+    cout<<"Based on your responses, here are 10 countries with the highest"<<endl;
+    cout<<"number of cities that satisfy your responses"<<endl;
+    cout<<endl;
+    cout<<endl;
+
+    cout<<"Enter one number that corresponds to the country"<<endl;
+    cout<<"to see a list of all the possible cities you can travel \nto within that country."<<endl;
+    cout<<"Enter 11 if you are done viewing.\n"<<endl;
+    for(int i=0; i<10; i++){
+        cout<<(i+1)<<". "<<countries[i]<<": "<<number_of_cities[i]<<" cities"<<endl;
+    }
+    cout<<"11. CANCEL\n"<<endl;
+    cin>>option;
+
+    while(option!=11){
+        cout<<"Wise choice."<<endl;
+        cout<<"Here is a list of all the cities that adhere to your responses within "<<countries[option-1]<<"."<<endl;
+        cout<<endl;
+        cout<<endl;
+
+        if(ds_option==1){
+            tree.printInorder(countries[option-1]);
+        }
+        else{
+            m.traverse(countries[option-1]);
+        }
+
+        cout<<endl;
+        cout<<endl;
+
+        cout<<"Enter one number that corresponds to the country"<<endl;
+        cout<<"to see a list of all the possible cities you can travel \nto within that country."<<endl;
+        cout<<"Enter 11 if you are done viewing.\n"<<endl;
+        for(int i=0; i<10; i++){
+            cout<<(i+1)<<". "<<countries[i]<<": "<<number_of_cities[i]<<" cities"<<endl;
+        }
+        cout<<"11. CANCEL"<<endl;
+
+        cin>>option;
+    }
 
     cout<<endl;
-    cout<<"Finished"<<endl;
-    cout<<curr_temp<<endl;
+    cout<<"Have a wonderful trip!"<<endl;
+    cout<<"See you next time :)"<<endl;
 
     return 0;
 }

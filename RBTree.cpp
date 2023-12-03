@@ -128,15 +128,17 @@ void RBTree::balance(Node* root) {
 }
 
 // citation: serene cheon's gatoravl
-void RBTree::printInorderHelper(Node* root) {
+void RBTree::printInorderHelper(Node* root,string name) {
     if (root == nullptr) // when tree is empty
-        cout<<endl;
+        cout<<"";
     // inorder traversal
     else{
-        printInorderHelper(root->left);
-        root->city.print();
-        cout<<endl;
-        printInorderHelper(root->right);
+        printInorderHelper(root->left, name);
+        if(root->city.get_country()==name){
+            root->city.print();
+            cout<<endl;
+        }
+        printInorderHelper(root->right, name);
     }
 
 }
@@ -145,6 +147,6 @@ void RBTree::insert(City city) {
     root_ = insertHelper(root_, city);
 }
 
-void RBTree::printInorder() {
-    printInorderHelper(root_);
+void RBTree::printInorder(string name) {
+    printInorderHelper(root_,name);
 }

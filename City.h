@@ -44,8 +44,7 @@ public:
     }
     void print(){
         cout << "City Name : " << name << endl;
-        cout << "Country : " << country << endl;
-        cout << "Temperature : " << temp << " °F"<< endl;
+        cout << "Temperature : " << temp << " Farenheit"<< endl;
         cout << "Plane Ticket Price : $" << plane_ticket << endl;
         cout << "Relative Price Value: " << rel_price << endl;
     }

@@ -40,12 +40,15 @@ void map::rehash() {
         }
     }
 }
-void map::traverse() {
+void map::traverse(string country) {
     for(auto i:vec){
         for(int j=0; j<i.size(); j++){
-            cout<<j<<endl;
-            i.at(j).print();
-            cout<<endl;
+            City temp=i.at(j);
+
+            if(temp.get_country()==country){
+                temp.print();
+                cout<<endl;
+            }
         }
     }
 }

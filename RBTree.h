@@ -37,10 +37,10 @@ private:
     void rightRotate(Node* root);
     void balance(Node* root);
 
-    void printInorderHelper(Node* root);
+    void printInorderHelper(Node* root,string name);
 
 public:
     void insert(City city);
-    void printInorder();
+    void printInorder(string name);
     int count = 0;
 };

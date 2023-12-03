@@ -9,7 +9,9 @@
 #include "RBTree.h"
 #include "City.h"
 #include "map.h"
+#include <chrono>
 using namespace std;
+using namespace chrono;
 
 int main(){
     random_device rd;
@@ -60,6 +62,7 @@ int main(){
     cout << "3: $1,001 - $1,500" << endl;
     cout << "4: $1,501 - $2,000" << endl;
     cin >> option;
+
     int ticketMin, ticketMax = 0;
     // set plane ticket price range
     if (option == 1) {
@@ -111,6 +114,7 @@ int main(){
     getline(file, line);
 
     // read each line
+    auto start = high_resolution_clock::now();
     while (getline(file, line)) {
 
         stringstream ss(line);
@@ -138,16 +142,14 @@ int main(){
 
         City city(fields[0], fields[4], stof(fields[2]), ticket, r_price);
 
-        // insert the cities within the temperature range only
+        // insert the cities within the range only
         if (city.get_temp() >= tempMin && city.get_temp() <= tempMax &&
             city.get_plane_ticket() >= ticketMin && city.get_plane_ticket() <= ticketMax &&
             city.get_rel_price() >= priceMin && city.get_rel_price() <= priceMax) {
-            if(ds_option==1){
+            if(ds_option==1)
                 tree.insert(city);
-            }
-            else{
+            else
                 m.insert(city);
-            };
 
             auto it=find(countries.begin(),countries.end(),city.get_country());
             if( it== countries.end()){
@@ -163,6 +165,14 @@ int main(){
         }
 
     }
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    if (ds_option == 1)
+        cout << "Tree execution time: " << duration.count() << " microseconds\n" << endl;
+    else
+        cout << "Map execution time: " << duration.count() << " microseconds\n" << endl;
+
+
     int a=0;
 
     //country selection
@@ -226,8 +236,8 @@ int main(){
         cout<<endl;
         cout<<endl;
 
-        cout<<"Enter one number that corresponds to the country"<<endl;
-        cout<<"to see a list of all the possible cities you can travel \nto within that country."<<endl;
+        cout<<"Enter one number that corresponds to the country to see a list of all the possible"<<endl;
+        cout<<"cities you can travel to within that country."<<endl;
         cout<<"Enter 11 if you are done viewing.\n"<<endl;
         for(int i=0; i<10; i++){
             cout<<(i+1)<<". "<<countries[i]<<": "<<number_of_cities[i]<<" cities"<<endl;

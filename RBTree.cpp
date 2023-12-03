@@ -84,13 +84,11 @@ void RBTree::balance(Node* root) {
             } else {
                 // 2) node is right child of parent, left rotate
                 if (root == parent->right) {
-                    //leftRotate(root);
                     leftRotate(parent);
                     root = parent;
                     parent = root->parent;
                 }
                 // 3) node is left child of parent, right rotate
-                //swap(parent->color, grand->color);
                 rightRotate(grand);
                 parent->color = 0;
                 grand->color = 1;
@@ -108,13 +106,11 @@ void RBTree::balance(Node* root) {
             }
             else { // 2) node is left child of parent, right rotate
                 if (root == parent->left) {
-                    //rightRotate(root);
                     rightRotate(parent);
                     root = parent;
                     parent = root->parent;
                 }
                 // 3) node is right child of parent, left rotate
-                //swap(parent->color, grand->color);
                 leftRotate(grand);
                 parent->color = 0;
                 grand->color = 1;

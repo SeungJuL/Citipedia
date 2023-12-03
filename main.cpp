@@ -197,13 +197,12 @@ int main(){
         number_of_cities[maxI]=temp;
     }
 
-    cout<<"Based on your responses, here are 10 countries with the highest"<<endl;
-    cout<<"number of cities that satisfy your responses"<<endl;
-    cout<<endl;
+    cout<<"Based on your responses, here are 10 countries with the highest number of cities"<<endl;
+    cout<<"that satisfy your responses."<<endl;
     cout<<endl;
 
-    cout<<"Enter one number that corresponds to the country"<<endl;
-    cout<<"to see a list of all the possible cities you can travel \nto within that country."<<endl;
+    cout<<"Enter one number that corresponds to the country to see a list of all the possible"<<endl;
+    cout<<"cities you can travel to within that country."<<endl;
     cout<<"Enter 11 if you are done viewing.\n"<<endl;
     for(int i=0; i<10; i++){
         cout<<(i+1)<<". "<<countries[i]<<": "<<number_of_cities[i]<<" cities"<<endl;
